@@ -1,0 +1,17 @@
+<h1>Posts</h1>
+
+Our club has <%= Post.all.count %> posts and counting!
+
+  <% @posts.each do |post| %>
+      <h1><%= post.title %></h1><br>
+      <p><%= post.body %></p><br>
+      <% if user_signed_in? %>        
+        <% user = User.find(post.user_id)%>
+        <p><%= user.email %></p><br><br>
+      <% end %>   
+  <% end %>  
+
+
+<%= link_to "New post", new_post_path %>
+<%= link_to "Sign in", new_user_session_path %>
+<%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %>
